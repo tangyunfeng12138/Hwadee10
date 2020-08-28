@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwadee.enroll_employ_sys.dao.QBankDao">
+    <select id="FindById" parameterType="java.lang.Integer" resultType="com.hwadee.enroll_employ_sys.entity.Q_Bank">
+        select qb_id,qb_name,qb_type,qb_number from question_bank where qb_id=#{qb_id}
+    </select>
+
+    <resultMap id="QBankResultList" type="com.hwadee.enroll_employ_sys.entity.Q_Bank">
+        <result property="qb_id" column="qb_id" />
+        <result property="qb_name" column="qb_name" />
+        <result property="qb_type" column="qb_type" />
+        <result property="qb_number" column="qb_number"/>
+    </resultMap>
+    <select id="FindByName" parameterType="java.lang.String" resultMap="QBankResultList">
+       select qb_id,qb_name,qb_type,qb_number from question_bank where qb_name=#{qb_name}
+    </select>
+
+    <select id="FindByType" parameterType="java.lang.String" resultMap="QBankResultList">
+        select qb_id,qb_name,qb_type,qb_number from question_bank where qb_type=#{qb_type}
+    </select>
+
+    <select id="Findall" resultMap="QBankResultList">
+        select qb_id,qb_name,qb_type,qb_number from question_bank
+    </select>
+
+    <update id="updateQBank" parameterType="com.hwadee.enroll_employ_sys.entity.Q_Bank">
+        update question_bank set   qb_name=#{qb_name},qb_type=#{qb_type},qb_number=#{qb_number}
+        where qb_id=#{qb_id}
+    </update>
+
+    <insert id="addQBank" parameterType="com.hwadee.enroll_employ_sys.entity.Q_Bank">
+        insert into question_bank(qb_id,qb_name,qb_type,qb_number) values(#{qb_id},#{qb_name},#{qb_type},#{qb_number})
+    </insert>
+
+
+</mapper>
+

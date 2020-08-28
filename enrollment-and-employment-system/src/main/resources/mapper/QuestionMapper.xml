@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwadee.enroll_employ_sys.dao.QuestionDao">
+    <resultMap id="questionResult" type="com.hwadee.enroll_employ_sys.entity.Question">
+        <result property="q_id" column="q_id" />
+        <result property="q_name" column="q_name" />
+        <result property="q_text" column="q_text" />
+        <result property="q_answer" column="q_answer" />
+        <association property="q_bank" javaType="Q_Bank">
+            <id property="qb_id" column="qb_id" />
+            <result property="qb_id" column="qb_id" />
+        </association>
+    </resultMap>
+    <select id="FindById" parameterType="java.lang.Integer" resultMap="questionResult">
+        select q_id,q_name,q_text,q_answer,qb_id from question where q_id=#{q_id}
+    </select>
+
+    <select id="FindByName" parameterType="java.lang.String" resultMap="questionResult">
+        select q_id,q_name,q_text,q_answer,qb_id from question where q_name=#{q_name}
+    </select>
+
+    <select id="FindByQBId" parameterType="java.lang.Integer" resultMap="questionResult">
+        select q_id,q_name,q_text,q_answer,qb_id from question where qb_id=#{qb_id}
+    </select>
+
+    <update id="updateQuestion" parameterType="com.hwadee.enroll_employ_sys.entity.Question">
+        update question set q_name=#{q_name},q_text=#{q_text},q_answer=#{q_answer}
+        where q_id=#{q_id}
+    </update>
+
+    <insert id="addQuestion" parameterType="com.hwadee.enroll_employ_sys.entity.Question">
+        insert into question (q_id,q_name,q_text,q_answer,qb_id) values(#{q_id},#{q_name},#{q_text},#{q_answer},#{q_bank.qb_id})
+    </insert>
+
+    <delete id="deleteQuestion" parameterType="java.lang.Integer">
+        delete from question where q_id=#{q_id}
+    </delete>
+
+</mapper>
