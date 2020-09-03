@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwadee.dao.AttendMapper">
+
+
+  
+  <select id="getAttendList"  resultType="com.hwadee.pojo.Attend">
+    select 
+   		attend_time,
+		attend_id,
+		total_number,
+		absent_number,
+		leave_number,
+		file_name,
+		submission_date
+    from attend  	
+  </select>
+  
+  <delete id="deleteAttend" parameterType="java.lang.String">
+    delete from attend
+    where attend_id = #{attend_id}
+  </delete>
+
+  
+  <insert id="insertAttend" parameterType="com.hwadee.pojo.Attend"> 
+
+    insert into attend (
+    	attend_id,
+		attend_time,
+		total_number,
+		absent_number,
+		leave_number,
+		file_name,
+		submission_date
+      )
+    values (#{attend_id,jdbcType=VARCHAR},#{attend_time,jdbcType=VARCHAR}, #{total_number,jdbcType=VARCHAR}, 
+      #{absent_number,jdbcType=VARCHAR}, #{leave_number,jdbcType=VARCHAR}
+      , #{file_name,jdbcType=VARCHAR}, #{submission_date,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateAttend" parameterType="com.hwadee.pojo.Attend">
+	  update attend
+	    set 
+	      attend_time = #{attend_time,jdbcType=VARCHAR}, 
+	      total_number = #{total_number,jdbcType=VARCHAR}, 
+	      absent_number = #{absent_number,jdbcType=VARCHAR}, 
+	      leave_number = #{leave_number,jdbcType=VARCHAR},
+	      file_name = #{file_name,jdbcType=VARCHAR},
+	      submission_date = #{submission_date,jdbcType=VARCHAR}
+	   where attend_id=#{attend_id}
+  </update>
+  
+
+  
+
+
+
+</mapper>
