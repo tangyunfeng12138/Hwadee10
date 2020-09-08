@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hwadee.enroll_employ_sys.dao.CandidateDao">
+
+
+
+    <select id="getCandidateList"  resultType="com.hwadee.enroll_employ_sys.entity.Candidate">
+    select
+		e_id,
+		s_name,
+		subjects,
+		e_sex,
+		e_address,
+		campus
+    from candidate
+  </select>
+
+    <delete id="deleteCandidate" parameterType="java.lang.String">
+    delete from candidate
+    where e_id = #{e_id}
+  </delete>
+
+
+    <insert id="insertCandidate" parameterType="com.hwadee.enroll_employ_sys.entity.Candidate">
+
+    insert into candidate (
+    	e_id,
+		s_name,
+		subjects,
+		e_sex,
+		e_address,
+		campus
+      )
+    values (#{e_id,jdbcType=VARCHAR},#{s_name,jdbcType=VARCHAR}, #{subjects,jdbcType=VARCHAR},
+      #{e_sex,jdbcType=VARCHAR}, #{e_address,jdbcType=VARCHAR}
+      , #{campus,jdbcType=VARCHAR})
+  </insert>
+
+    <update id="updateCandidate" parameterType="com.hwadee.enroll_employ_sys.entity.Candidate">
+	  update candidate
+	    set
+	      e_id = #{e_id,jdbcType=VARCHAR},
+	      s_name = #{s_name,jdbcType=VARCHAR},
+	      subjects = #{subjects,jdbcType=VARCHAR},
+	      e_sex = #{e_sex,jdbcType=VARCHAR},
+	      e_address = #{e_address,jdbcType=VARCHAR},
+	      campus = #{campus,jdbcType=VARCHAR}
+	   where e_id=#{e_id}
+  </update>
+
+
+</mapper>
